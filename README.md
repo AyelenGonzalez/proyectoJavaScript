@@ -1,0 +1,2 @@
+# proyectoJavaScript
+Primer proyecto JavaScript
