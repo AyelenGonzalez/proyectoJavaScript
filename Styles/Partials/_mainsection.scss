@@ -1,0 +1,26 @@
+.main{
+    margin-top: 10vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 1rem;
+    justify-content: center;
+
+    &__card{
+        text-align: center;
+        color: red;
+        font-family: monospace;
+        border-radius: 5%;
+        border-style: dotted;
+        border-color: red;
+        box-shadow: 1px 2px black;
+        margin-top: 1rem;
+        
+
+        &--title{
+            font-size: 2em;
+            text-decoration: underline;
+            text-shadow: 1px 2px black;
+        }
+    }
+}
+
