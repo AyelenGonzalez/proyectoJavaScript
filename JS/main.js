@@ -15,14 +15,13 @@ function fillPage(productsArray){
 
         let productCard = document.createElement(`div`);
          
-        console.log(code, tipe, name, image, price)
         productCard.className = `column is-one-quarter main__card is-flex is-flex-direction-column is-justify-content-center is-align-items-center`;
 
         productCard.innerHTML = `<img src = ${image} alt="${code}">
                                  <h2 class = main__card--title>${name}</h2>
                                  <p>${tipe}</p>
                                  <p>$<strong>${price}</strong></p>
-                                 <button class="button is-link cardButton">Agregar al carrito</button>`;
+                                 <button class="button is-hidden is-link cardButton">Agregar al carrito</button>`;
 
         mainContainer.appendChild(productCard);
     }
@@ -55,7 +54,7 @@ function addToCart(e){
     
     Toastify({
         text: `PRODUCTO AGREGADO!`,
-        duration: 3000,
+        duration: 1000,
         style: {
             background: "linear-gradient(to right, #00b09b, #96c93d)"
         }
@@ -91,4 +90,46 @@ function cartCounter(cartArray){
     cartText.innerHTML = `<img src="Images/logocarrito.png" alt="Carrito de Compras" width="30" height="40">
                           <p>(${totalProducts})</p>`
 
+}
+
+fetch ('https://apis.datos.gob.ar/georef/api/provincias?')
+  .then( res => res.json())
+  .then ( data => {
+    data.provincias.forEach(element => {
+     const statesList = document.getElementById('states');
+     let option = document.createElement('option');
+     option.text = `${element.nombre}`;
+     statesList.appendChild (option);
+  })
+});
+
+
+
+const registerButton = document.querySelector("#register__button");
+registerButton.addEventListener("click", registerUser);
+
+function registerUser(e){
+  const name = e.target.closest(`.box`).children[0].children[1].children[0].value;
+  const adress = e.target.closest(`.box`).children[1].children[1].children[0].value;
+  const state = e.target.closest(`.box`).children[1].children[1].children[1].children[0].value;
+  const email = e.target.closest(`.box`).children[2].children[1].children[0].value;
+  const password = e.target.closest(`.box`).children[3].children[1].children[0].value;
+  const user = new User(name, adress, state, email, password);
+  localStorage.setItem(`user`, JSON.stringify(user));
+}
+
+const loginButton = document.querySelector(`#login`);
+loginButton.addEventListener("click", loginUser);
+
+function loginUser(e){
+    const rUser = JSON.parse(localStorage.getItem('user'));
+    const uEmail = e.target.closest(`.loginParent`).children[0].children[0].children[0].value;
+    const uPass = e.target.closest(`.loginParent`).children[1].children[0].children[0].value;
+    
+    if(uEmail === rUser.email && uPass === rUser.password){
+        const vButtons = document.querySelectorAll ('.cardButton');
+        vButtons.forEach (element =>{
+            element.classList.remove('is-hidden');
+        })
+    }
 }

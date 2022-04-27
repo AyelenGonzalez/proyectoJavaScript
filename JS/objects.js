@@ -18,3 +18,13 @@ class CartProduct{
         this.subtotal = price;
     }
 }
+
+class User{
+    constructor(name, adress, state, email, password){
+        this.name = name;
+        this.adress = adress;
+        this.state = state;
+        this.email = email;
+        this.password = password;
+    }
+}

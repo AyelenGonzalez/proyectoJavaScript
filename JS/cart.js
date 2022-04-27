@@ -65,7 +65,7 @@ function removeProduct(e){
     
     Toastify({
         text: `PRODUCTO ELIMINADO!`,
-        duration: 3000,
+        duration: 1000,
         style: {
             background: "linear-gradient(to right, red, black)"
         }
